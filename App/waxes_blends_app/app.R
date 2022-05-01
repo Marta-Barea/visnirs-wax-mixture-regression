@@ -29,7 +29,7 @@ library(caret)
 
 # Loading saved model ----
 
-model <- readRDS("BorutaPLS.rsd") 
+model <- readRDS("BorutaPLS.rds") 
 
 # Server ----
 addResourcePath("static", "static")
