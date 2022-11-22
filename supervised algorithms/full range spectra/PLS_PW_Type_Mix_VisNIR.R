@@ -71,7 +71,7 @@ pls_model <- train(Sample ~.,
                    trControl = trctrl,
                    method = "pls", 
                    metric = "RMSE",
-                   tuneLength = 30) 
+                   tuneLength = 20) 
 pls_model
 
 total_time <- Sys.time() - start_time
