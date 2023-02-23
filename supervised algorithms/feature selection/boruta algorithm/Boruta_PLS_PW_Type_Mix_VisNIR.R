@@ -111,7 +111,7 @@ total_time
 
 summary(pls_model$finalModel)
 
-##saveRDS(pls_model, "~/Documents/GitHub/machine-learning_VisNIRS-Waxes-Type-mixture-Classification-Regression/App/BorutaPLS.rsd")
+##saveRDS(pls_model, "~/Documents/GitHub/machine-learning_VisNIRS-Waxes-Type-mixture-Classification-Regression/App/BorutaPLS.rds")
 
 ncomp_plot <- plot(pls_model,
                    xlab = "Number of components",
