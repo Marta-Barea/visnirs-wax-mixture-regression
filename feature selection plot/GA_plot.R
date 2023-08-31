@@ -78,7 +78,7 @@ ga_plot <- ggplot(data = df_2, aes(x = variable, y = value, color = Sample)) +
         axis.text = element_text(size = 8, hjust = 1, angle = 90),
         axis.title = element_text(size = 8)) +
   scale_x_discrete(limits = df_2$variable,
-                   breaks = df_2$variable[seq(1, length(df_2$variable), by = 3000)])+
+                   breaks = df_2$variable[seq(1, length(df_2$variable), by = 4000)])+
   geom_vline(xintercept = ga_feat, linetype = 1, colour = "#4286BE", size = 0.25, alpha = 0.20)
 
 ga_plot

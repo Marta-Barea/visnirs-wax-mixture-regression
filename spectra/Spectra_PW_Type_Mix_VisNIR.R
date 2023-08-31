@@ -27,11 +27,13 @@ registerDoParallel(cl)
 pw_data <- read_excel("~/Documents/Doctorado/Tesis Doctoral/Investigación Cepsa/Vis-NIR/XDS-NIR_FOSS/Estudio según Tipo de Parafina e Hidrotratamiento/NIRS_PW_Type_Hydrotreating.xlsx", 
                       sheet = "PW_Type_Mix_Spectra")
 
+pw_mean <- aggregate(.~ Sample, pw_data, mean)
+
 # Original NIR Spectra
 
-df <- reshape2::melt(pw_data, "Sample")
+df <- reshape2::melt(pw_mean, "Sample")
 
-spectra_plot <- ggplot(data = df, aes(x = variable, y = value, color = Sample)) + 
+spectra_plot <- ggplot(data = df, aes(x = variable, y = value, color = Sample, group = Sample)) + 
   geom_line() +
   labs(x = "Wavelength (nm)", y = "Absorbance") +
   theme_test()+ 
@@ -40,7 +42,7 @@ spectra_plot <- ggplot(data = df, aes(x = variable, y = value, color = Sample)) 
         axis.text = element_text(size = 8, hjust = 1, angle = 90),
         axis.title = element_text(size = 8)) +
   scale_x_discrete(limits = df$variable,
-                   breaks = df$variable[seq(1, length(df$variable), by = 2500)])
+                   breaks = df$variable[seq(1, length(df$variable), by = 500)])
 
 spectra_plot
 
@@ -51,9 +53,11 @@ pw_data$Sample <- as.factor(pw_data$Sample)
 sgvec <- savitzkyGolay(X = pw_data[,-1], p = 3, w = 11, m = 1)
 pw_sg <- cbind.data.frame(Sample = pw_data$Sample, sgvec)
 
-df_2 <- reshape2::melt(pw_sg, "Sample")
+pw_sg_mean <- aggregate(.~ Sample, pw_sg, mean)
 
-savitzky_plot <- ggplot(data = df_2, aes(x = variable, y = value, color = Sample)) + 
+df_2 <- reshape2::melt(pw_sg_mean, "Sample")
+
+savitzky_plot <- ggplot(data = df_2, aes(x = variable, y = value, color = Sample, group = Sample)) + 
   geom_line() +
   labs(x = "Wavelength (nm)", y = "Absorbance") +
   theme_test() + 
@@ -62,7 +66,7 @@ savitzky_plot <- ggplot(data = df_2, aes(x = variable, y = value, color = Sample
         axis.text = element_text(size = 8, hjust = 1, angle = 90),
         axis.title = element_text(size = 8)) +
   scale_x_discrete(limits = df_2$variable,
-                   breaks = df_2$variable[seq(1, length(df_2$variable), by = 2500)])
+                   breaks = df_2$variable[seq(1, length(df_2$variable), by = 500)])
 
 savitzky_plot
 

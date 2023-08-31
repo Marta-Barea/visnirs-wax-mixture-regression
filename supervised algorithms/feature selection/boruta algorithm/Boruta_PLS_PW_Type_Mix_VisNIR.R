@@ -203,7 +203,7 @@ ext_pred_matrix$Sample <- lapply(ext_pred_matrix$Real, replace_label)
 ext_group_labels <- rep("External validation", times = 8)
 ext_pred_matrix <- cbind(ext_pred_matrix, Group = ext_group_labels)
 
-df <- rbind(train_pred_matrix, test_pred_matrix, ext_pred_matrix)
+df <- rbind(test_pred_matrix, ext_pred_matrix)
 
 remove_col<- c("Sample","Group")
 labels_id <- as.matrix(df[, !(names(df) %in% remove_col)])
@@ -211,17 +211,26 @@ rownames(labels_id) <- df$Sample
 
 group <- as.factor(df$Group)
 
+unique_groups <- levels(group)
+group_colors <- c("red", "blue")
+
+test_label <- paste("Test set (RMSE:", round(rmse_test, 4), ", R-squared:", round(r2_test, 4), ")")
+ext_label <- paste("External validation set (RMSE:", round(rmse_ext, 4), ", R-squared:", round(r2_ext, 4), ")")
+
+legend_labels <- c(ext_label, test_label)
+legend_label_colors <- c("red", "blue")
+
 plot(x = df$Real,
      y = df$Predicted,
      type = "p",
-     pch = c(8, 7, 16)[factor(group)],
-     col = "black",
+     pch = c(8, 7)[factor(group)],
+     col = group_colors[factor(group)],
      main = "",
      xlab = "Real (%)",
      ylab = "Predicted (%)",
-     xlim = c(0,100))
+     xlim = c(0, 100))
 lines(0:100, 0:100, lwd = 1, lty = 1, col = "#EA6A60")
-legend(x = 5, y = 95, c("External validation set", "Test set", "Training set"), cex = 0.8, pch = c(8, 7, 16))
+legend(x = 0, y = 100, legend_labels, cex = 1, pch = c(8, 7), col = legend_label_colors)
 
 # Variable importance
 
