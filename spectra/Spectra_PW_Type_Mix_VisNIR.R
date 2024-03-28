@@ -27,7 +27,11 @@ registerDoParallel(cl)
 pw_data <- read_excel("~/Documents/Doctorado/Tesis Doctoral/Investigación Cepsa/Vis-NIR/XDS-NIR_FOSS/Estudio según Tipo de Parafina e Hidrotratamiento/NIRS_PW_Type_Hydrotreating.xlsx", 
                       sheet = "PW_Type_Mix_Spectra")
 
-pw_mean <- aggregate(.~ Sample, pw_data, mean)
+# Apply Multiplicative Scatter Correction (MSC)
+pw_data_msc <- pw_data
+pw_data_msc[,-1] <- msc(pw_data[,-1])
+
+pw_mean <- aggregate(.~ Sample, pw_data_msc, mean)
 
 # Original NIR Spectra
 
