@@ -60,7 +60,7 @@ cd visnirs-wax-mixture-regression </pre>
 3. Use the web interface to:
 - 📁 **Upload** `.csv` or `.xlsx` data files.
 - 🛠️ **Preprocess** data using advanced filtering techniques.
-- 🤖 **Predict** hydroprocessing grades with AI.
+- 🤖 **Predict** wax blends with AI.
 
 ---
 
