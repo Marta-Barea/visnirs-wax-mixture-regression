@@ -45,17 +45,18 @@ The **visnirs-wax-mixture-regression** repository includes data processing metho
 
 ### Clone the Repository
 
-
-   <pre markdown="1"> ```bash
+```bash
 git clone https://github.com/Marta-Barea/visnirs-wax-mixture-regression
-cd visnirs-wax-mixture-regression </pre>
+cd visnirs-wax-mixture-regression
+```
 
 ### Running the Shiny Application
 1. Place `app.R`, `svm.rds`, `svr.rds`and `test_data.xlsx` in the same folder.
 2. In your R console, run: 
    
-   <pre markdown="1"> ```R 
-      shiny::runApp("app.R") </pre>
+```R 
+shiny::runApp("app.R")
+```
 
 3. Use the web interface to:
 - 📁 **Upload** `.csv` or `.xlsx` data files.
